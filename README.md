@@ -1,11 +1,11 @@
-# Nexss PROGRAMMER 2.0
+# Nexss PROGRAMMER 2.x
 
-Read me file template.
+Debug package for Nexss Programmer 2.x
 
 ## Examples
 
 ```sh
-nexss file add myfile.php
-nexss f add test.pl
-nexss f a abc.ahk
+nexss FS/Dir . | nexss Debug # Will display trace of all varaibles in nice way
+# There is also another way --nxsPretty
+nexss FS/Dir . --nxsPretty
 ```
