@@ -1,0 +1,4 @@
+name: Debug
+debug: true
+files:
+  - name: src/debug.js
