@@ -4,20 +4,19 @@ const {
   nxsTrace,
 } = require(`${process.env.NEXSS_PACKAGES_PATH}/Nexss/Lib/NexssLog.js`);
 
-process.stdin.on("data", function (NexssStdin) {
-  let NexssStdout;
-  try {
-    NexssStdout = JSON.parse(NexssStdin.toString());
-  } catch (e) {
-    console.error(e);
-    process.exit(1);
-  }
-  nxsTrace(JSON.stringify(NexssStdout, null, 2));
-  // STDOUT
-  process.stdout.write(JSON.stringify(NexssStdout));
-});
+const NexssIn = require(`${process.env.NEXSS_PACKAGES_PATH}/Nexss/Lib/NexssIn.js`);
+let NexssStdout = NexssIn();
 
-process.stdin.on("end", function () {
-  //On Windows below is not needed.
-  process.exit(0);
-});
+// if (NexssStdout.nxsIn) {
+//   NexssStdout["DDDDDDDDDDDDD"] = NexssStdout.nxsIn;
+// }
+
+if (!NexssStdout.nxsAs) {
+  nxsTrace(JSON.stringify(NexssStdout, null, 2));
+} else {
+  NexssStdout[NexssStdout.resultField_1] = JSON.stringify(NexssStdout, null, 2);
+}
+
+delete NexssStdout.nxsIn;
+delete NexssStdout.resultField_1;
+process.stdout.write(JSON.stringify(NexssStdout));
